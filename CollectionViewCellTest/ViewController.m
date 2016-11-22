@@ -1,29 +1,26 @@
-//
-//  ViewController.m
-//  CollectionViewCellTest
-//
-//  Created by Tom Bates on 22/11/2016.
-//  Copyright © 2016 Tom Bates. All rights reserved.
-//
-
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UICollectionViewDelegate,
+UICollectionViewDataSource>
+
+@property (nonatomic, weak) IBOutlet UICollectionView * collectionView;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section
+{
+  return 2;
 }
 
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSString *identifier = indexPath.row == 0 ? @"cell_one" : @"cell_two";
+  return [collectionView dequeueReusableCellWithReuseIdentifier:identifier
+                                                   forIndexPath:indexPath];
 }
-
 
 @end
